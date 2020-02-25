@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+
+    </style>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objeto Naigator</title>
+
+   
+</head>
+<body>
+    <h1>Haz click para obtener las coordenadas</h1>
+    <button onclick="getLocation()">Ver coordenadas</button>
+
+    <p id="demo"></p>
+
+
+    <script>
+
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else
+            {
+                x.innerHTML = "No tiene geolocalizacion"
+            }
+        }
+
+        function showPosition (position){
+            x.innerHTML = "latitud: "+ "<br>" + position.coords.latitude + "<br>" + "<br>" + "Longitud:" +"<br>"+ position.coords.longitude
+        }
+
+    </script>
+    
+    
+</body>
+</html>
