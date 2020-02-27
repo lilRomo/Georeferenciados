@@ -37,28 +37,23 @@
     </div>
 
     <script>
-        function obtieneUbicacion(){
-            if(navigator.geolocation)
-            {
+        
+        function obtieneUbicacion() {
+            if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(muestraPosicion);
 
-            }
+            } else {
 
-            else
-            {
-                alert("NO")
-
-            }
-
-            function muestraPosicion(position){
-                var coordenadas = position.coords.latitude+","+ position.coords.longitude;
-                console.log(coordenadas);
-
-                var imagenurl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coordenadas + "&zoom=20&size=800x800&key=AIzaSyBGsp1EqEiYiX6S7Eeuzcyf7NnejdnLu50";
-
-                document.getElementById("mapa").innerHTML = "<img src="+imagenurl + ">";
             }
         }
+
+        function muestraPosicion(posicion) {
+            var coordenadas = posicion.coords.latitude + "," + posicion.coords.longitude;
+            console.log(coordenadas);
+            var imagen = "https://maps.googleapis.com/maps/api/staticmap?center=" + coordenadas + "&zoom=14&size=900x400&key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA";
+            document.getElementById("mapa").innerHTML = "<img src=" + imagen + ">";
+        }
+    
     </script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
