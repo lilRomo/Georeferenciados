@@ -26,8 +26,15 @@
     </nav>
     <br>
 
-    <button onclick="obtieneUbicacion()">Obtener Ubicación</button>
-    <div id="mapa" style=" padding-left: 50px; border: #1100cc 10px solid;  background-color: gray; width: 700px; height: 400px;"></div>
+    <div class="container-fluid  rounded shadow-lg  ">
+        <div class="container ">
+            <button class="btn btn-outline-primary btn-rounded waves-effect" onclick="obtieneUbicacion()">Obtener Ubicación</button>
+            <div class="row m-5  ">
+               
+                <div id="mapa" style=" padding-left: 50px; border: #000000 10px solid;  background-color: gray; width: 700px; height: 400px;"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
         function obtieneUbicacion(){
