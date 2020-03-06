@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <style>
+
+.background {
+         background-color:slategray;
+         }
+
+    body{
+      padding: 2rem 0rem;
+      }
+      .image-parent {
+         max-width: 40px;
+        }
+
+        #lista li{
+        padding:10px;
+        list-style:none;
+         
+         border: 2px solid rgb(252, 252, 252);
+         border-color:black;
+         border-radius: 20px;
+         border-width: 5px;
+         text-align: left;
+         font-size: 120%;    
+         color: aliceblue;
+    
+        line-height: 5px;
+
+        text-decoration: none;
+
+        
+
+        margin: 20px 10px;
+
+      }
+
+      #lista button{
+        
+        background-color: #000000; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+      }
+
+      
+
+        
+    
+  </style>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-firestore.js"></script>
+
+  <title>Document</title>
+</head>
+
+<body class="background">
+
+  <nav class="navbar navbar-expand-sm bg-light">
+    <a href="../index.html">
+    <img href="../index.html" src="../home.png" width="50px" height="50px"> 
+    </a>
+  <ul class="navbar-nav">
+      
+    <li class="nav-item">
+   <a class="nav-link" href="../index.html"> <h1> Home  </h1></a>
+    </li>
+    
+  </ul>
+</nav>
+  <br>
+  <br>
+
+
+
+
+
+
+  <div class="row ">
+
+    <div class="col-sm-1"></div>
+    <div class="col-sm-4">
+
+      <form id="form">
+        <br>
+        
+        <div class="card">
+
+          <h5 class="card-header info-color white-text text-center py-4">
+            <strong>Registrar Usuario</strong>
+          </h5>
+          <br>
+        
+         
+          <div class="card-body px-lg-5 pt-0">
+        
+            
+            <form class="text-center" style="color: #757575;" action="#!">
+        
+              
+              <div class="md-form">
+                <input type="text" name="nombre" class="form-control form-control-lg" placeholder="Nombre">
+                <label >Nombre</label>
+              </div>
+        
+              
+              <div class="md-form">
+                <input type="text" name="codigo" class="form-control form-control-lg" placeholder="Codigo">
+                <label >Codigo</label>
+              </div>
+        
+             
+              <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Registrar</button>
+        
+            
+            
+              
+        
+            </form>
+           
+        
+          </div>
+        
+        </div>
+      </form>
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <div class="col-sm-2"></div>
+
+  
+
+
+
+
+      <div class="col-sm-4 ">
+        <h4 class="text-light">Lista de Clientes</h4> 
+        <ul class="list-group" id="lista" >
+
+          
+
+
+
+
+        </ul>
+      </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+    // Your web app's Firebase configuration
+
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyCwi-q9bfQXvbaquhwpqhPHeLSmRvCteQc",
+      authDomain: "sistemasgeo6754.firebaseapp.com",
+      databaseURL: "https://sistemasgeo6754.firebaseio.com",
+      projectId: "sistemasgeo6754",
+      storageBucket: "sistemasgeo6754.appspot.com",
+      messagingSenderId: "157934654192",
+      appId: "1:157934654192:web:cedb76184ba1acd17e6835"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const productoslista = document.querySelector("#lista");
+    const formulario = document.querySelector("#form");
+
+
+    function renderProductos(doc) {
+
+      console.log(doc.id);
+
+      let li = document.createElement("li");
+      let nombre = document.createElement("nombre");
+      let codigo = document.createElement("span");
+      let espacio = document.createElement("br");
+      let borrar = document.createElement("button");
+
+      nombre.textContent = "Nombre: "+doc.data().nombre + "" ;
+
+      codigo.textContent =  "     Codigo: "+doc.data().codigo + "";
+      borrar.textContent = "X";
+
+      li.setAttribute("id", doc.id);
+
+      li.appendChild(borrar);
+      li.appendChild(nombre);
+      li.appendChild(espacio);
+
+      li.appendChild(codigo);
+
+     
+
+      
+      productoslista.appendChild(li);
+      borrar.addEventListener("click", (e) => {
+        let id = e.target.parentElement.getAttribute("id");
+        db.collection("productos").doc(id).delete();
+      });
+
+
+    }
+
+
+    /* db.collection('productos').get().then( (snapshot) =>{
+  
+      snapshot.docs.forEach(doc =>{
+       
+       renderProductos(doc);
+  
+      });
+  
+    }); *///referencia al campo creado en la pagina de firebase
+
+    formulario.addEventListener("submit", (e) => {
+      e.preventDefault();//cada que se presiona el boton se actualiza
+      db.collection("productos").add(
+        {
+          nombre: formulario.nombre.value,
+          codigo: formulario.codigo.value
+        }
+      );
+    });
+
+    db.collection("productos").onSnapshot(snapshot => {
+
+      let changes = snapshot.docChanges();
+      changes.forEach(change => {
+        if (change.type == "added") {
+          renderProductos(change.doc);
+        } else if (change.type == "removed") {
+          console.log(change.doc.id);
+          let valorid = document.getElementById(change.doc.id);
+          lista.removeChild(valorid);
+        }
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>
