@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #map {
+            height: 100%;
+        }
+
+        html, body {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map">
+
+    </div>
+    
+    <script>
+
+        var coordenadas = {
+            lat: 0,
+            lng: 0
+        }
+
+        var propiedades = {
+            center: coordenadas,
+            zoom: 20
+        }
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), propiedades);
+
+            var marker = new google.maps.Marker({
+                position: { lat: 0, lng: 0 }
+            });
+
+            var icono = {
+                url: "https://i.pinimg.com/originals/92/f4/97/92f4972c3c3775da020024797165f2fb.gif",
+                scaledSize: new google.maps.Size(50, 50),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0,0)
+            };
+
+
+
+            var marker = new google.maps.Marker({
+                position: { lat: 0 , lng: 0},
+                icon: icono,
+                scaledSize: new google.maps.Size(50,50),
+                map: map
+            });
+
+            if (navigator.geolocation) {
+                setInterval(function(){
+                    moverPosicion(marker);
+                },3000);
+                moverPosicion(marker)
+            }
+        }
+
+        function moverPosicion(marker) {
+            navigator.geolocation.getCurrentPosition(posicion => {
+                var pos = {
+                    lat: posicion.coords.latitude,
+                    lng: posicion.coords.longitude
+                }
+                marker.setPosition(new google.maps.LatLng(posicion.coords.latitude, posicion.coords.longitude));
+                /*MOCIMIENTO DEL MAPA EN BASE A LA UBICACION*/
+                map.panTo(new google.maps.LatLng(posicion.coords.latitude, posicion.coords.longitude));
+                /*CENTRAMOS EL MAPA*/
+                map.setCenter(pos);
+            });
+
+
+        }
+
+    </script>
+    
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBL_rCP3lkgspRRE29-Nx8N9yvdcoqvRo&callback&callback=initMap"
+        async defer></script>
+</body>
+</html>
