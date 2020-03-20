@@ -1,50 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <style>
         .background {
-         background-color:slategray;
-         }
+            background-color: slategray;
+        }
+
+        #googleMap {
+            height: 100%;
+        }
+
+        .map-container-5 {
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            position: relative;
+            height: 0;
+        }
+
+        .map-container-5 iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
 
 
-         #lista li{
-        padding:10px;
-        list-style:none;
-         
-         border: 2px solid rgb(252, 252, 252);
-         border-color:black;
-         border-radius: 20px;
-         border-width: 5px;
-         text-align: left;
-         font-size: 120%;    
-         color: aliceblue;
-    
-        line-height: 5px;
 
-        text-decoration: none;
+        #lista li {
+            padding: 10px;
+            list-style: none;
 
-        
+            border: 2px solid rgb(252, 252, 252);
+            border-color: black;
+            border-radius: 20px;
+            border-width: 5px;
+            text-align: left;
+            font-size: 120%;
+            color: aliceblue;
 
-        margin: 20px 10px;
+            line-height: 5px;
 
-      }
+            text-decoration: none;
 
 
-      
-      #lista button{
-        
-      
-        border: none;
-        padding: 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-         cursor: pointer;
-         border-radius: 50%;
-      }
+
+            margin: 20px 10px;
+
+        }
+
+
+
+        #lista button {
+
+
+            border: none;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,33 +74,39 @@
     <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-firestore.js"></script>
     <script src="https://kit.fontawesome.com/725910d27b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
- 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
+
 <body class="background">
 
     <nav class="navbar navbar-expand-sm bg-light">
         <a href="../index.html">
-        <img href="../index.html" src="../home.png" width="50px" height="50px"> 
+            <img href="../index.html" src="../home.png" width="50px">
         </a>
-      <ul class="navbar-nav">
-          
-        <li class="nav-item">
-       <a class="nav-link" href="../index.html"> <h1> Home  </h1></a>
-        </li>
-        
-      </ul>
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link" href="../index.html">
+                    <h1> Home </h1>
+                </a>
+            </li>
+
+        </ul>
     </nav>
-      <br>
-      <br>
-
-    
+    <br>
+    <br>
 
 
-        
-        
-        <div class="col-sm-4 ">
-            <h4 class="text-light">Lista de Clientes</h4>
+
+    <div class="row">
+
+        <div class="col-md-1"></div>
+
+
+        <div class="col-md-4 ">
+            <h4 class="text-light">Lista Ubicaciones</h4>
 
 
             <div class="container-fluid ">
@@ -91,28 +118,48 @@
                     </div>
                 </div>
             </div>
-        
-        
-    
-    
-    
-            
-          </div>
 
-          <div class="card-body card-body-cascade text-center">
-  
-            <div id="googleMap" style="width:100%;height:400px;"></div>
 
-              
+
+
+
+
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="card card-cascade narrower col-md-5">
+
+            <div class="card-image"
+                style="background-image: url(https://www.diariodemorelos.com/noticias/sites/default/files/field/image/La%20nueva%20actualización%20de%20Google%20Maps%20mostrará%20tu%20velocidad%20en%20tiempo%20real.jpg)">
+
+                <div class="text-white d-flex h-100 mask blue-gradient-rgba">
+                    <div class="first-content align-self-center p-3">
+                        <h3 class="text-dark card-title">Mapa</h3>
+                    </div>
+                    <div class="second-content align-self-center mx-auto text-center">
+                        <i class="far fa-money-bill-alt fa-3x"></i>
+                    </div>
+                </div>
             </div>
-    
-          </div>
 
 
-    
-          
-    
 
+
+
+            <div class="card-body card-body-cascade text-center">
+
+                <div id="googleMap" class="z-depth-1-half map-container-5" style="height: 500px">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3"></div>
+
+    </div>
 
     <!-- The Modal -->
 
@@ -133,6 +180,10 @@
             lat.type = "text";
             lat.value = registro.lat;
             lat.className = "Lat form-control";
+
+            let borrar = document.createElement("button");
+    borrar.className = "btn btn-danger m-3";
+    borrar.textContent = "Borrar  ";
         
             let long = document.createElement("input");
             long.type = "text";
@@ -149,6 +200,7 @@
         
         
             li.appendChild(buscar);
+            li.appendChild(borrar);
             li.appendChild(lat);
             li.appendChild(espacio);
             li.appendChild(long);
@@ -161,15 +213,22 @@
                 myMap(lati,latu);
                 
             });
+
+            borrar.addEventListener("click", (e) => {   
+        let id = e.target.parentElement.getAttribute("id");             
+        registro.borrar(id);
+    });
         
         }
 
 
         function myMap(lati,latu) {
 
+
+
         var mapProp= {
             center:new google.maps.LatLng(lati,latu),
-            zoom:50,
+            zoom:19,
             };
             var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
         }

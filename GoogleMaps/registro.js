@@ -14,6 +14,13 @@ class Registro {
 
 
     
+    borrar(id){
+        db.collection('ubicacion').doc(id).delete();
+
+    };
+
+
+    
 
 
     

