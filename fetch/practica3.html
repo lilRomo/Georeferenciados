@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Fetch3</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -10,15 +12,104 @@
         height: 100%;
       }
  
+      .background {
+         background-color:slategray;
+         }
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
+
+      .map-container-5{
+overflow:hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+}
+.map-container-5 iframe{
+left:0;
+top:0;
+height:100%;
+width:100%;
+position:absolute;
+}
     </style>
   </head>
-  <body>
-    <div id="map"></div>
+  <body class="background">
+
+    <nav class="navbar navbar-expand-sm bg-light">
+      <a href="index.html">
+      <img href="../index.html" src="../home.png" width="50px" height="50px"> 
+      </a>
+    <ul class="navbar-nav">
+        
+      <li class="nav-item">
+     <a class="nav-link" href="../index.html"> <h1> Home  </h1></a>
+      </li>
+      
+    </ul>
+  </nav>
+  <br>
+
+
+
+  
+
+
+<div class="row">
+
+  <div class="col-md-3"></div>
+  
+  <div class="col-md-6 mb-4">
+
+  
+    <div class="card card-cascade narrower">
+
+      <div class="card-image" style="background-image: url(https://www.diariodemorelos.com/noticias/sites/default/files/field/image/La%20nueva%20actualización%20de%20Google%20Maps%20mostrará%20tu%20velocidad%20en%20tiempo%20real.jpg)">
+
+      <div class="text-white d-flex h-100 mask blue-gradient-rgba">
+          <div class="first-content align-self-center p-3">
+            <h3  class="text-dark card-title">Mapa</h3>
+          </div>
+          <div class="second-content align-self-center mx-auto text-center">
+            <i class="far fa-money-bill-alt fa-3x"></i>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="card-body card-body-cascade text-center">
+
+        <div id="map" class="z-depth-1-half map-container-5" style="height: 300px">
+          
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="col-md-3"></div>
+
+
+</div>
+  
+
+
+
+ 
+    
+
+
+
+
+
+
     <script>
  
     var coordenadas = {
@@ -54,7 +145,133 @@
 
     function iniciaMapa() {
 
-        const map = new google.maps.Map(document.getElementById('map'), propiedades);
+      var styledMapType = new google.maps.StyledMapType(
+            [
+              {elementType: 'geometry', stylers: [{color: '#ebe3cd'}]},
+              {elementType: 'labels.text.fill', stylers: [{color: '#523735'}]},
+              {elementType: 'labels.text.stroke', stylers: [{color: '#f5f1e6'}]},
+              {
+                featureType: 'administrative',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#c9b2a6'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#dcd2be'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#ae9e90'}]
+              },
+              {
+                featureType: 'landscape.natural',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#93817c'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#a5b076'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#447530'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{color: '#f5f1e6'}]
+              },
+              {
+                featureType: 'road.arterial',
+                elementType: 'geometry',
+                stylers: [{color: '#fdfcf8'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry',
+                stylers: [{color: '#f8c967'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#e9bc62'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry',
+                stylers: [{color: '#e98d58'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#db8555'}]
+              },
+              {
+                featureType: 'road.local',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#806b63'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#8f7d77'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.stroke',
+                stylers: [{color: '#ebe3cd'}]
+              },
+              {
+                featureType: 'transit.station',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#b9d3c2'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#92998d'}]
+              }
+            ],
+            {name: 'Styled Map'});
+
+        // Create a map object, and include the MapTypeId to add
+        // to the map type control.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 55.647, lng: 37.581},
+          zoom: 3,
+          mapTypeControlOptions: {
+            mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+                    'styled_map']
+          }
+        });
+
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('styled_map', styledMapType);
+        map.setMapTypeId('styled_map');
 
         const marcadores = obtieneMarcadores();
 
@@ -73,7 +290,7 @@
  
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGsp1EqEiYiX6S7Eeuzcyf7NnejdnLu50&callback=iniciaMapa">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEdp3_fDMm3aA5IDDd5UiNqHyCl4ee2Bs&callback=iniciaMapa">
     </script>
   </body>
 </html>
